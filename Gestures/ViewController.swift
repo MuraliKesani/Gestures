@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     
     var swipeUPGR:UISwipeGestureRecognizer!
     var swipeDOWNGR:UISwipeGestureRecognizer!
+    var rotateGR:UIRotationGestureRecognizer!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,9 @@ class ViewController: UIViewController {
         swipeDOWNGR.direction = .down
         swipeDOWNGR.numberOfTouchesRequired = 1
         viewRotate.addGestureRecognizer(swipeDOWNGR)
+        
+        rotateGR = UIRotationGestureRecognizer(target: self, action: #selector(onRotation))
+        viewRotate.addGestureRecognizer(rotateGR)
     }
     
     @objc func onSwipeUP()
@@ -48,6 +53,12 @@ class ViewController: UIViewController {
         lblText.text = "Swipe Down"
     }
     
+    @objc func onRotation()
+    {
+        lblText.text = "ROTATION"
+        viewRotate.transform = viewRotate.transform.rotated(by: rotateGR.rotation)
+        rotateGR.rotation = 0
+    }
     
 
 }
