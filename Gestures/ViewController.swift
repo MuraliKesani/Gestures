@@ -10,10 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var swipeUPGR:UISwipeGestureRecognizer!
+@IBOutlet var lblText: UILabel!
+@IBOutlet var viewRotate: UIView!
     
-    @IBOutlet var lblText: UILabel!
-    @IBOutlet var viewRotate: UIView!
+    var swipeUPGR:UISwipeGestureRecognizer!
+    var swipeDOWNGR:UISwipeGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +29,26 @@ class ViewController: UIViewController {
         swipeUPGR.direction = .up
         swipeUPGR.numberOfTouchesRequired = 1
         viewRotate.addGestureRecognizer(swipeUPGR)
+        
+        
+        swipeDOWNGR = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeDown))
+        swipeDOWNGR.direction = .down
+        swipeDOWNGR.numberOfTouchesRequired = 1
+        viewRotate.addGestureRecognizer(swipeDOWNGR)
     }
     
     @objc func onSwipeUP()
     {
         lblText.text = "Swipe UP"
     }
+    
+    
+    @objc func onSwipeDown()
+    {
+        lblText.text = "Swipe Down"
+    }
+    
+    
 
 }
 
