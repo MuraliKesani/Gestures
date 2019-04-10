@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var swipeUPGR:UISwipeGestureRecognizer!
     var swipeDOWNGR:UISwipeGestureRecognizer!
     var rotateGR:UIRotationGestureRecognizer!
+    var pinchGR:UIPinchGestureRecognizer!
     
     
     override func viewDidLoad() {
@@ -40,6 +41,9 @@ class ViewController: UIViewController {
         
         rotateGR = UIRotationGestureRecognizer(target: self, action: #selector(onRotation))
         viewRotate.addGestureRecognizer(rotateGR)
+        
+        pinchGR = UIPinchGestureRecognizer(target: self, action: #selector(onPinch))
+        viewRotate.addGestureRecognizer(pinchGR)
     }
     
     @objc func onSwipeUP()
@@ -60,6 +64,11 @@ class ViewController: UIViewController {
         rotateGR.rotation = 0
     }
     
-
+    @objc func onPinch()
+    {
+        lblText.text = "PINCH"
+        viewRotate.transform = viewRotate.transform.scaledBy(x: pinchGR.scale, y: pinchGR.scale)
+        pinchGR.scale = 1
+    }
 }
 
